@@ -8,8 +8,17 @@ output:
 ---
 
 
-
 ## Project thoughts
 
 I am interested in exploring data related to...
 how democracies may impact whether countries have gender quotas. I could look at different kinds of democracies across countries and compare the gender quotas in the countries.
+
+## Final Project Milestone 2
+
+My research question has changed as a result of finding a different data set. My research question is: Does an increase in the adoption of gender quotas increase women’s representation in national legislatures? I will examine whether countries with gender quotas have a higher percentage of women in their lower houses of parliament. Gender quotas are put in place to help women overcome barriers to becoming candidates, and they require a minimum level of female representation. My independent variable is effective.quota, which is coded as 1 if it is present in the country and 0 if it is not. My dependent variable is women.rep, which is the percentage of women in the lower house of parliament. I hypothesize there will be a positive relationship between effective quotas and women’s representation in parliament. If the data shows a positive relationship (in countries with effective quotas, there are higher percentages of female representation), and a statistically significant coefficient for effective.quota, this would support my hypothesis. If the coefficient is not positive or significant, this would suggest that these gender quotas do not increase women’s representation.
+
+```{r}
+library(readr)
+QAROT_DATA <- read_csv("~/Desktop/PS 270/QAROT_DATA.csv")
+head(QAROT_DATA)
+```
