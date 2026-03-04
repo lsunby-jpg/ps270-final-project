@@ -7,7 +7,6 @@ output:
     self_contained: false
 ---
 
-
 ## Project thoughts
 
 I am interested in exploring data related to...
