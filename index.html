@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["Final_Project_Data.numbers","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["Final_Project_Data.numbers","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1552,22 +1552,76 @@ how democracies may impact whether countries have gender quotas. I could look at
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span></span>
-<span><span class='va'>QAROT_DATA</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"~/Desktop/PS 270/QAROT_DATA.csv"</span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>QAROT_DATA</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span></span>
+<span>  <span class='st'>"~/Desktop/PS 270/QAROT_DATA.csv"</span>,</span>
+<span>  skip <span class='op'>=</span> <span class='fl'>1</span></span>
+<span><span class='op'>)</span></span>
 <span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>QAROT_DATA</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code># A tibble: 6 × 1
-  QAROTdata_HughesPaxtonClaytonZetterberg_CountryYear_V1_August2017 …¹
-  &lt;chr&gt;                                                               
-1 country,year,code,code.year,adopted.quota,implemented.quota,first.a…
-2 Afghanistan,1947,AFG,AFG1947,0,0,0,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,…
-3 Afghanistan,1948,AFG,AFG1948,0,0,0,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,…
-4 Afghanistan,1949,AFG,AFG1949,0,0,0,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,…
-5 Afghanistan,1950,AFG,AFG1950,0,0,0,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,…
-6 Afghanistan,1951,AFG,AFG1951,0,0,0,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,…
-# ℹ abbreviated name:
-#   ¹​`QAROTdata_HughesPaxtonClaytonZetterberg_CountryYear_V1_August2017 (1)`</code></pre>
+<pre><code># A tibble: 6 × 26
+  country      year code  code.year adopted.quota implemented.quota
+  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;             &lt;dbl&gt;             &lt;dbl&gt;
+1 Afghanistan  1947 AFG   AFG1947               0                 0
+2 Afghanistan  1948 AFG   AFG1948               0                 0
+3 Afghanistan  1949 AFG   AFG1949               0                 0
+4 Afghanistan  1950 AFG   AFG1950               0                 0
+5 Afghanistan  1951 AFG   AFG1951               0                 0
+6 Afghanistan  1952 AFG   AFG1952               0                 0
+# ℹ 20 more variables: first.adopt.flag &lt;dbl&gt;,
+#   first.implement.flag &lt;dbl&gt;, adopted.reform.flag &lt;dbl&gt;,
+#   implemented.reform.flag &lt;dbl&gt;, quota.reform.number &lt;dbl&gt;,
+#   implement.reform.number &lt;dbl&gt;, type &lt;chr&gt;,
+#   percent.stated.threshold &lt;dbl&gt;, percent.of.seats &lt;dbl&gt;,
+#   defacto.threshold &lt;dbl&gt;, sanctions &lt;dbl&gt;,
+#   sanctions.strength &lt;chr&gt;, placement &lt;dbl&gt;, …</code></pre>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>clean_data</span> <span class='op'>&lt;-</span> <span class='va'>QAROT_DATA</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>country</span>, <span class='va'>year</span>, <span class='va'>effective.quota</span>, <span class='va'>women.rep</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span></span>
+<span>    year <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>year</span><span class='op'>)</span>,</span>
+<span>    effective.quota <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>effective.quota</span><span class='op'>)</span>,</span>
+<span>    women.rep <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>women.rep</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/drop_na.html'>drop_na</a></span><span class='op'>(</span><span class='va'>effective.quota</span>, <span class='va'>women.rep</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>clean_data</span></span></code></pre>
+</div>
+<pre><code># A tibble: 8,518 × 4
+   country      year effective.quota women.rep
+   &lt;chr&gt;       &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Afghanistan  1965               0       2  
+ 2 Afghanistan  1966               0       2  
+ 3 Afghanistan  1967               0       2  
+ 4 Afghanistan  1968               0       2  
+ 5 Afghanistan  1969               0       0  
+ 6 Afghanistan  1970               0       0  
+ 7 Afghanistan  1971               0       0  
+ 8 Afghanistan  1972               0       0  
+ 9 Afghanistan  1973               0       0  
+10 Afghanistan  1988               0       3.7
+# ℹ 8,508 more rows</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>clean_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>effective.quota</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='va'>women.rep</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"lightblue"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Effect of Gender Quotas on Women's Representation in Parliament"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Effective Gender Quota (0 = No, 1 = Yes)"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Women in Parliament(%)"</span></span>
+<span>  <span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span></span>
+<span>    plot.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>hjust <span class='op'>=</span> <span class='fl'>0.5</span>, face <span class='op'>=</span> <span class='st'>"bold"</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" alt="" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

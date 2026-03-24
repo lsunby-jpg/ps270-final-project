@@ -18,6 +18,39 @@ My research question has changed as a result of finding a different data set. My
 
 ```{r}
 library(readr)
-QAROT_DATA <- read_csv("~/Desktop/PS 270/QAROT_DATA.csv")
+library(tidyverse)
+
+QAROT_DATA <- read_csv(
+  "~/Desktop/PS 270/QAROT_DATA.csv",
+  skip = 1
+)
 head(QAROT_DATA)
 ```
+
+```{r}
+clean_data <- QAROT_DATA |>
+  select(country, year, effective.quota, women.rep) |>
+  mutate(
+    year = as.numeric(year),
+    effective.quota = as.numeric(effective.quota),
+    women.rep = as.numeric(women.rep)
+  ) |>
+  drop_na(effective.quota, women.rep)
+
+clean_data
+```
+
+```{r}
+ggplot(clean_data, aes(x = factor(effective.quota), y = women.rep)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(
+    title = "Effect of Gender Quotas on Women's Representation in Parliament",
+    x = "Effective Gender Quota (0 = No, 1 = Yes)",
+    y = "Women in Parliament(%)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold")
+  )
+```
+
