@@ -1621,6 +1621,59 @@ how democracies may impact whether countries have gender quotas. I could look at
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" alt="" width="624" /></p>
 </div>
+<h2 id="analysis">Analysis</h2>
+<p>The boxplot shows women’s representation in parliament in countries with an effective gender quota, and without an effective gender quota. As seen above, countries that had effective gender quotas showed higher median levels of women’s representation in comparison to countries without quotas.The distribution for countries with effective quotas is shifted upward. This shows that these quotas are associated with increased representation in parliament. Overall, the boxplot supports my initial hypothesis that gender quotas are associated with higher levels of women’s representation in parliament.</p>
+##Results
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>summary_table</span> <span class='op'>&lt;-</span> <span class='va'>clean_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>effective.quota</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span></span>
+<span>    mean_representation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>women.rep</span><span class='op'>)</span>,</span>
+<span>    median_representation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/median.html'>median</a></span><span class='op'>(</span><span class='va'>women.rep</span><span class='op'>)</span>,</span>
+<span>    sd_representation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>women.rep</span><span class='op'>)</span>,</span>
+<span>    n <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
+<span>    .groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>summary_table</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 24%" />
+<col style="width: 27%" />
+<col style="width: 22%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">effective.quota</th>
+<th style="text-align: right;">mean_representation</th>
+<th style="text-align: right;">median_representation</th>
+<th style="text-align: right;">sd_representation</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">9.29</td>
+<td style="text-align: right;">6.7</td>
+<td style="text-align: right;">9.09</td>
+<td style="text-align: right;">7977</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">23.66</td>
+<td style="text-align: right;">22.6</td>
+<td style="text-align: right;">10.93</td>
+<td style="text-align: right;">541</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
