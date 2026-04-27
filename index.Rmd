@@ -77,6 +77,7 @@ knitr::kable(summary_table, digits = 2)
 ```
 
 ## Regression
+
 ```{r}
 regression_model <- lm(women.rep ~ effective.quota, data = clean_data)
 summary(regression_model)
