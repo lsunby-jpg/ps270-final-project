@@ -41,6 +41,8 @@ clean_data
 ```
 
 ```{r}
+library(readr)
+library(tidyverse)
 ggplot(clean_data, aes(x = factor(effective.quota), y = women.rep)) +
   geom_boxplot(fill = "lightblue") +
   labs(
@@ -73,3 +75,11 @@ summary_table <- clean_data |>
 
 knitr::kable(summary_table, digits = 2)
 ```
+
+## Regression
+```{r}
+regression_model <- lm(women.rep ~ effective.quota, data = clean_data)
+summary(regression_model)
+```
+
+When there is no gender quota the expected percentage of women in parliament is 9.29%. In countries with an effective gender quota we expect on average a 14.37 percentage point increase in women's representation compared to countries without quotas.  
