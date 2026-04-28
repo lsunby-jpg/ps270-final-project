@@ -1,22 +1,14 @@
 ---
-title: "PS270 Final Project"
+title: "Representation Matters: Now how do we get it?"
 author: "Lillie Claire Sunby"
-description: "My final project"
+description: "The impact of gender quotas on women's representation in national legislatures."
 output:
   distill::distill_article:
     self_contained: false
 ---
 
-## Project thoughts
 
-I am interested in exploring data related to...
-how democracies may impact whether countries have gender quotas. I could look at different kinds of democracies across countries and compare the gender quotas in the countries.
-
-## Final Project Milestone 2
-
-My research question has changed as a result of finding a different data set. My research question is: Does an increase in the adoption of gender quotas increase women’s representation in national legislatures? I will examine whether countries with gender quotas have a higher percentage of women in their lower houses of parliament. Gender quotas are put in place to help women overcome barriers to becoming candidates, and they require a minimum level of female representation. My independent variable is effective.quota, which is coded as 1 if it is present in the country and 0 if it is not. My dependent variable is women.rep, which is the percentage of women in the lower house of parliament. I hypothesize there will be a positive relationship between effective quotas and women’s representation in parliament. If the data shows a positive relationship (in countries with effective quotas, there are higher percentages of female representation), and a statistically significant coefficient for effective.quota, this would support my hypothesis. If the coefficient is not positive or significant, this would suggest that these gender quotas do not increase women’s representation.
-
-```{r}
+```{r setup, include=FALSE}
 library(readr)
 library(tidyverse)
 
@@ -25,9 +17,7 @@ QAROT_DATA <- read_csv(
   skip = 1
 )
 head(QAROT_DATA)
-```
 
-```{r}
 clean_data <- QAROT_DATA |>
   select(country, year, effective.quota, women.rep) |>
   mutate(
@@ -36,11 +26,63 @@ clean_data <- QAROT_DATA |>
     women.rep = as.numeric(women.rep)
   ) |>
   drop_na(effective.quota, women.rep)
-
-clean_data
 ```
 
-```{r}
+## Introduction  
+
+Women have historically been underrepresented in political institutions across the world. This prevents equal representation and ultimately reduces diversity of perspectives when it comes to policy making. There have been several policies enacted in an attempt to address this issue. One policy designed to fix under-representation is the adoption of gender quotas. When implemented, gender quotas are used to require a minimum amount of female representation across specific political environments. This study will look at whether the adoption of gender quotas is effective in increasing women’s representation in national legislatures across different countries. So through this project we ask: **Does the adoption of gender quotas effectively increase women’s representation in national legislatures?** It is crucial that everyone feels represented in politics. By better understanding the best ways to gain equal representation, we can strengthen politics in general. **I hypothesize that countries with effective gender quotas will have higher levels of women’s representation than countries without quotas.**
+
+## Data
+
+The data for this study comes from the Quota Adoption and Reform over Time (QAROT), Version 1, 1947–2015 dataset created by Hughes, Paxton, Clayton, and Zetterberg (2017). It has a cross-sectional research design using country-year data for 190 countries from 1947 to 2015. It contains information regarding the adoption, implementation, and reform of gender quotas, as well as women’s representation in national legislatures. Because the dataset contains this information for a large variety of countries it works well to examine whether effective quotas are associated with higher levels of women’s representation. In the table below you will see the names and descriptions of the variables we will be focusing on from the dataset.
+
+-------------------------------------------------------------------------------------------
+Name                Description
+------------------- ------------------------------------------------------------------------
+`country`   			      Name of Country
+
+`year`    			        Year
+
+`effective.quota`   	  Effective quota is coded 1 if a country has a quota that 
+                        reaches a 10 percent de facto threshold for either candidate or
+                        reserved seat quotas. Further, candidate quotas are only coded as
+                        effective if they have strong sanctions for noncompliance and / or
+                        have strong placement mandates. Reserved seats are only coded as
+                        effective if they have a legal mechanism specified to fill the reserved
+                        seats. This variable indicates a minimally functioning quota that can
+                        be included in a wide range of models to control for an important
+                        structural feature of political competition.
+
+`women.rep`     	      The percent women in the national legislature, lower house.  
+----------------------------------------------------------------------------------------------------------
+
+The independent variable is **effective.quota**, coded as 1 if a country has an minimally functioning gender quota and 0 if it does not. Quotas are considered "effective" when they meet a 10 percent de facto threshold for either candidate or reserved seat quotas. Additionally they are only coded as 1 if they also include enforcement mechanisms such as strong sanctions, strong placement mandates, or legally specified reserved seat procedures. The dependent variable is **women.rep**, measured as the percentage of women in the lower house of parliament (see histogram below summarizing women.rep).
+
+Using a regression analysis, I expect the coefficient for effective.quota to be positive and statistically significant. This would indicate that effective gender quotas are associated with an increase in the percentage of women serving in parliament. If the coefficient is not positive or statistically significant, this would suggest that quotas do not substantially increase women’s legislative representation and the hypothesis will be rejected. 
+
+
+```{r, echo=FALSE}
+library(ggplot2)
+
+ggplot(clean_data, aes(x = women.rep)) +
+  geom_histogram(binwidth = 5, fill = "midnightblue", color = "black") +
+  labs(
+    title = "Distribution of Women's Representation in Parliament",
+    x = "Women in Lower House (%)",
+    y = "Count (# of observations)"
+  ) +
+  theme_gray() +
+    theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+---
+
+## Results
+
+#### The boxplot shows women's representation in parliament in countries with an effective gender quota, and without an effective gender quota. 
+
+
+```{r, echo=FALSE}
 library(readr)
 library(tidyverse)
 ggplot(clean_data, aes(x = factor(effective.quota), y = women.rep)) +
@@ -48,21 +90,43 @@ ggplot(clean_data, aes(x = factor(effective.quota), y = women.rep)) +
   labs(
     title = "Effect of Gender Quotas on Women's Representation in Parliament",
     x = "Effective Gender Quota (0 = No, 1 = Yes)",
-    y = "Women in Parliament(%)"
+    y = "Women in Lower House (%)"
   ) +
-  theme_minimal() +
+  theme_gray() +
   theme(
     plot.title = element_text(hjust = 0.5, face = "bold")
   )
 ```
 
-## Analysis
+As seen above, countries that had effective gender quotas showed higher median levels of women’s representation in comparison to countries without quotas.The distribution for countries with effective quotas is shifted upward. This shows that these quotas are associated with increased representation in parliament. Overall, the boxplot supports my initial hypothesis that gender quotas are associated with higher levels of women’s representation in parliament.
 
-The boxplot shows women's representation in parliament in countries with an effective gender quota, and without an effective gender quota. As seen above, countries that had effective gender quotas showed higher median levels of women’s representation in comparison to countries without quotas.The distribution for countries with effective quotas is shifted upward. This shows that these quotas are associated with increased representation in parliament. Overall, the boxplot supports my initial hypothesis that gender quotas are associated with higher levels of women’s representation in parliament.
+### Regression
+```{r, echo=FALSE}
+library(knitr)
+library(kableExtra)
+library(modelsummary)
 
-##Results
-```{r}
+regression_model <- lm(women.rep ~ effective.quota, data = clean_data)
+
+modelsummary(
+  list("Results" = regression_model),
+  output = "kableExtra",
+  escape = FALSE,
+  title = "Regression Results: Women’s Representation and Gender Quotas",
+  stars = TRUE,
+  statistic = c("p.value"))
+```
+
+
+The regression analysis supports my hypothesis further showing not only a positive coefficient but, in the double digits. When there is no gender quota the expected percentage of women in parliament is 9.29%. In countries with an effective gender quota we expect on average a 14.37 percentage point increase in women's representation compared to countries without quotas. These findings are statistically significant with the p-value being <0.001. However, these findings should not be interpreted as definitively causal because this analysis is cross-sectional. There may be other factors that influence both quota adoption and women’s representation that were not analyzed in this study.
+
+
+## Conclusion
+
+```{r, echo=FALSE}
 library(tidyverse)
+library(knitr)
+library(kableExtra)
 
 summary_table <- clean_data |>
   group_by(effective.quota) |>
@@ -71,16 +135,22 @@ summary_table <- clean_data |>
     median_representation = median(women.rep),
     sd_representation = sd(women.rep),
     n = n(),
-    .groups = "drop")
+    .groups = "drop"
+  )
 
-knitr::kable(summary_table, digits = 2)
+summary_table |>
+  rename(
+    "Quota level" = effective.quota,
+    "Mean representation" = mean_representation,
+    "Median representation" = median_representation,
+    "SD" = sd_representation,
+    "N" = n
+  ) |>
+  kable(digits = 2, format = "html") |>
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE
+  )
 ```
 
-## Regression
-
-```{r}
-regression_model <- lm(women.rep ~ effective.quota, data = clean_data)
-summary(regression_model)
-```
-
-When there is no gender quota the expected percentage of women in parliament is 9.29%. In countries with an effective gender quota we expect on average a 14.37 percentage point increase in women's representation compared to countries without quotas.  
+Overall, the results provide strong support for my hypothesis that effective gender quotas are associated with higher levels of women’s representation in national legislatures. Both the boxplot and regression results show that countries with effective quotas tend to have significantly more women serving in parliament than countries without such quotas. The regression suggests that effective quotas are associated with an increase of about 14 percentage points in women’s representation, which is a larger difference than I expected. However, there are limitations to this analysis. To begin, the cross-sectional analysis means that this cannot establish causation. Future research could improve this analysis by adding control variables, or using a before-and-after design to better estimate the causal impact of quotas. If I had more time or resources to spend on this project I would look more into the economic development in these regions and education levels to see whether they play a role in the effect of gender quotas.
