@@ -1,7 +1,14 @@
 ---
-title: "Representation Matters: Now how do we get it?"
-author: "Lillie Claire Sunby"
-description: "The impact of gender quotas on women's representation in national legislatures."
+title: "Representation Matters: How do we get it?"
+author: "The impact of gender quotas on women's representation in national legislatures.
+
+
+
+
+
+
+
+Lillie Sunby"
 output:
   prettydoc::html_pretty:
     theme: architect
@@ -57,11 +64,11 @@ Name                Description
 `women.rep`     	      The percent women in the national legislature, lower house.  
 ----------------------------------------------------------------------------------------------------------
 
-The independent variable is **effective.quota**, coded as 1 if a country has an minimally functioning gender quota and 0 if it does not. Quotas are considered "effective" when they meet a 10 percent de facto threshold for either candidate or reserved seat quotas. Additionally they are only coded as 1 if they also include enforcement mechanisms such as strong sanctions, strong placement mandates, or legally specified reserved seat procedures. The dependent variable is **women.rep**, measured as the percentage of women in the lower house of parliament (see histogram below summarizing women.rep).
+The independent variable is **effective.quota**, coded as 1 if a country has an minimally functioning gender quota and 0 if it does not. Quotas are considered "effective" when they meet a 10 percent de facto threshold for either candidate or reserved seat quotas. Additionally they are only coded as 1 if they also include enforcement mechanisms such as strong sanctions, strong placement mandates, or legally specified reserved seat procedures. The dependent variable is **women.rep**, measured as the percentage of women in the lower house of parliament (see figure 1 below summarizing women.rep).
 
-Using a regression analysis, I expect the coefficient for effective.quota to be positive and statistically significant. This would indicate that effective gender quotas are associated with an increase in the percentage of women serving in parliament. If the coefficient is not positive or statistically significant, this would suggest that quotas do not substantially increase women’s legislative representation and the hypothesis will be rejected. 
+Using a regression analysis, I expect the coefficient for effective.quota to be positive and statistically significant which **would support my hypothesis**. This would indicate that effective gender quotas are associated with an increase in the percentage of women serving in parliament. The results **would not suppport my hypothesis** if the coefficient is not positive and statistically significant, this would suggest that quotas do not substantially increase women’s legislative representation and the hypothesis will be rejected. 
 
-
+##### Figure #1
 ```{r, echo=FALSE}
 library(ggplot2)
 
@@ -82,7 +89,7 @@ ggplot(clean_data, aes(x = women.rep)) +
 
 #### The boxplot shows women's representation in parliament in countries with an effective gender quota, and without an effective gender quota. 
 
-
+##### Figure #2
 ```{r, echo=FALSE}
 library(readr)
 library(tidyverse)
@@ -115,7 +122,8 @@ modelsummary(
   escape = FALSE,
   title = "Regression Results: Women’s Representation and Gender Quotas",
   stars = TRUE,
-  statistic = c("p.value"))
+  fmt = 2,
+  statistic = c("std.error", "p.value"))
 ```
 
 
