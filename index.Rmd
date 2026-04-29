@@ -3,8 +3,9 @@ title: "Representation Matters: Now how do we get it?"
 author: "Lillie Claire Sunby"
 description: "The impact of gender quotas on women's representation in national legislatures."
 output:
-  distill::distill_article:
-    self_contained: false
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
 ---
 
 
@@ -101,7 +102,7 @@ ggplot(clean_data, aes(x = factor(effective.quota), y = women.rep)) +
 As seen above, countries that had effective gender quotas showed higher median levels of women’s representation in comparison to countries without quotas.The distribution for countries with effective quotas is shifted upward. This shows that these quotas are associated with increased representation in parliament. Overall, the boxplot supports my initial hypothesis that gender quotas are associated with higher levels of women’s representation in parliament.
 
 ### Regression
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
 library(kableExtra)
 library(modelsummary)
