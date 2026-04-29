@@ -11,7 +11,7 @@ author: "The impact of gender quotas on women's representation in national legis
 Lillie Sunby"
 output:
   prettydoc::html_pretty:
-    theme: architect
+    theme: leonids
     highlight: github
 ---
 
@@ -24,7 +24,6 @@ QAROT_DATA <- read_csv(
   "~/Desktop/PS 270/QAROT_DATA.csv",
   skip = 1
 )
-head(QAROT_DATA)
 
 clean_data <- QAROT_DATA |>
   select(country, year, effective.quota, women.rep) |>
@@ -68,12 +67,12 @@ The independent variable is **effective.quota**, coded as 1 if a country has an 
 
 Using a regression analysis, I expect the coefficient for effective.quota to be positive and statistically significant which **would support my hypothesis**. This would indicate that effective gender quotas are associated with an increase in the percentage of women serving in parliament. The results **would not suppport my hypothesis** if the coefficient is not positive and statistically significant, this would suggest that quotas do not substantially increase women’s legislative representation and the hypothesis will be rejected. 
 
-##### Figure #1
+###### Figure #1
 ```{r, echo=FALSE}
 library(ggplot2)
 
 ggplot(clean_data, aes(x = women.rep)) +
-  geom_histogram(binwidth = 5, fill = "midnightblue", color = "black") +
+  geom_histogram(binwidth = 5, fill = "indianred2", color = "black") +
   labs(
     title = "Distribution of Women's Representation in Parliament",
     x = "Women in Lower House (%)",
@@ -89,12 +88,12 @@ ggplot(clean_data, aes(x = women.rep)) +
 
 #### The boxplot shows women's representation in parliament in countries with an effective gender quota, and without an effective gender quota. 
 
-##### Figure #2
+###### Figure #2
 ```{r, echo=FALSE}
 library(readr)
 library(tidyverse)
 ggplot(clean_data, aes(x = factor(effective.quota), y = women.rep)) +
-  geom_boxplot(fill = "lightblue") +
+  geom_boxplot(fill = "coral2", color = "black") +
   labs(
     title = "Effect of Gender Quotas on Women's Representation in Parliament",
     x = "Effective Gender Quota (0 = No, 1 = Yes)",
@@ -106,7 +105,7 @@ ggplot(clean_data, aes(x = factor(effective.quota), y = women.rep)) +
   )
 ```
 
-As seen above, countries that had effective gender quotas showed higher median levels of women’s representation in comparison to countries without quotas.The distribution for countries with effective quotas is shifted upward. This shows that these quotas are associated with increased representation in parliament. Overall, the boxplot supports my initial hypothesis that gender quotas are associated with higher levels of women’s representation in parliament.
+As seen above, countries that had effective gender quotas showed higher median levels of women’s representation in comparison to countries without quotas. The distribution for countries with effective quotas is shifted upward. This shows that these quotas are associated with increased representation in parliament. Overall, the boxplot supports my initial hypothesis that gender quotas are associated with higher levels of women’s representation in parliament.
 
 ### Regression
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
